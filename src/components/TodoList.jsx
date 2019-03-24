@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { List, Paper } from "@material-ui/core";
 import ToDoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
@@ -44,4 +45,4 @@ const TodoList = () => {
   );
 };
 
-export default TodoList;
+export default connect()(TodoList);
