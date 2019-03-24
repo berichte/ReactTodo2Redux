@@ -97,7 +97,7 @@ export default {
 
 Alternatively checkout redux1 branch
 
-### Use Redux instead of component state
+### Use Redux instead of component state in TodoList
 
 1. add connect to TodoList
    ```
@@ -108,3 +108,29 @@ Alternatively checkout redux1 branch
 4. add action addTodo to mapDispatch and reducer
 5. add action deleteTodo to mapDis and reducer
 6. add action doTodo to mapDis and reducer
+
+### Use Redux instead of component state in AddTodo
+
+1. add connect
+2. add mapState
+
+```javascript
+const initialState = {
+  addingTodo: {
+    active: false,
+    item: {
+      text: "",
+      done: false
+    }
+  },
+  items: []
+};
+```
+
+3. add mapDispatch
+   1. addingTodoStart
+   2. textUpdate
+   3. cancel
+4. bug because onNewItem triggers addNew and textUpdate
+
+### optimize usage
