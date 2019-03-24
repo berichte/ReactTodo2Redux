@@ -1,10 +1,10 @@
-import React /*, { useState } */ from "react";
+import React, { memo /*useState*/ } from "react";
 import { connect } from "react-redux";
 import { List, Paper } from "@material-ui/core";
 import ToDoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
 
-import TodoActions from "../redux/todo/actions";
+// import TodoActions from "../redux/todo/actions";
 
 // const initialTodos = [
 //   { id: 0, text: "laundry", done: false },
@@ -27,20 +27,12 @@ const TodoList = ({ todos, addTodo, deleteTodo, doTodo }) => {
     <Paper style={{ margin: "10%" }}>
       <List>
         <React.Fragment>
-          {todos.map(({ id, text, done }) => (
-            <ToDoItem
-              key={id}
-              text={text}
-              done={done}
-              id={id}
-              onDelete={deleteTodo}
-              onDone={id => doTodo(id, false)}
-              onUndone={id => doTodo(id, true)}
-            />
+          {todos.map((/*{*/ id /*, text, done  }*/) => (
+            <ToDoItem key={id} id={id} />
           ))}
         </React.Fragment>
         <React.Fragment>
-          <AddTodo onNew={addTodo} />
+          <AddTodo /* onNew={addTodo} */ />
         </React.Fragment>
       </List>
     </Paper>
@@ -48,19 +40,19 @@ const TodoList = ({ todos, addTodo, deleteTodo, doTodo }) => {
 };
 
 const mapState = ({ todos }) => ({
-  todos: todos.list
+  todos: todos.list.map(({ id }) => id)
 });
 
-const mapDispatch = dispatch => ({
-  addTodo: todo => dispatch(TodoActions.addingTodosConfirm(todo)),
-  deleteTodo: id => dispatch(TodoActions.deleteTodo(id)),
-  doTodo: (id, done) =>
-    done
-      ? dispatch(TodoActions.checkTodo(id))
-      : dispatch(TodoActions.uncheckTodo(id))
-});
+// const mapDispatch = dispatch => ({
+//   addTodo: todo => dispatch(TodoActions.addingTodosConfirm(todo)),
+//   deleteTodo: id => dispatch(TodoActions.deleteTodo(id)),
+//   doTodo: (id, done) =>
+//     done
+//       ? dispatch(TodoActions.checkTodo(id))
+//       : dispatch(TodoActions.uncheckTodo(id))
+// });
 
 export default connect(
-  mapState,
-  mapDispatch
-)(TodoList);
+  mapState
+  // mapDispatch
+)(memo(TodoList));

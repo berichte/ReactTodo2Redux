@@ -1,4 +1,5 @@
-import React from "react";
+import React, { memo } from "react";
+import { connect } from "react-redux";
 import {
   ListItem,
   ListItemIcon,
@@ -12,15 +13,17 @@ import {
   Delete
 } from "@material-ui/icons";
 
+import TodoActions from "../redux/todo/actions";
+
 const ToDoItem = ({ id, text, done, onDone, onUndone, onDelete }) => (
   <ListItem>
     <ListItemIcon>
       {done ? (
-        <IconButton aria-label="done" onClick={() => onDone(id)}>
+        <IconButton aria-label="done" onClick={() => onUndone(id)}>
           <CheckCircleOutline />
         </IconButton>
       ) : (
-        <IconButton aria-label="undone" onClick={() => onUndone(id)}>
+        <IconButton aria-label="undone" onClick={() => onDone(id)}>
           <RadioButtonUnchecked />
         </IconButton>
       )}
@@ -32,6 +35,29 @@ const ToDoItem = ({ id, text, done, onDone, onUndone, onDelete }) => (
       </IconButton>
     </ListItemSecondaryAction>
   </ListItem>
+  // <div>
+  //   {done ? (
+  //     <span onClick={() => onUndone(id)}>Done</span>
+  //   ) : (
+  //     <span onClick={() => onDone(id)}>Todo</span>
+  //   )}
+
+  //   <span> {text}</span>
+  // </div>
 );
 
-export default ToDoItem;
+const mapState = ({ todos }, { id }) => {
+  const item = todos.list.find(item => item.id === id);
+  return item;
+};
+
+const mapDispatch = dispatch => ({
+  deleteTodo: id => dispatch(TodoActions.deleteTodo(id)),
+  onDone: id => dispatch(TodoActions.checkTodo(id)),
+  onUndone: id => dispatch(TodoActions.uncheckTodo(id))
+});
+
+export default connect(
+  mapState,
+  mapDispatch
+)(memo(ToDoItem));

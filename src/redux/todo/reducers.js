@@ -29,9 +29,14 @@ const initialState = {
 const TodoReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADDING_TODO_CONFIRM: {
+      const todo = {
+        id: Math.floor(Math.random() * 10000),
+        text: action.text,
+        done: false
+      };
       return {
         ...state,
-        list: [...state.list, action.todo],
+        list: [...state.list, todo],
         addingTodo: initalAddingTodo()
       };
     }

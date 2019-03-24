@@ -12,11 +12,11 @@ import { Add, Create, Clear } from "@material-ui/icons";
 
 import TodoActions from "../redux/todo/actions";
 
-const newItemFac = (onNew, setText, setNewItem) => text => {
-  onNew({ id: Math.floor(Math.random() * 10000), text, done: false });
-  // setText("");
-  // setNewItem(false);
-};
+// const newItemFac = (onNew, setText, setNewItem) => text => {
+//   onNew({ id: Math.floor(Math.random() * 10000), text, done: false });
+// setText("");
+// setNewItem(false);
+// };
 
 // const undoFac = (setText, setNewItem) => () => {
 //   setText("");
@@ -34,7 +34,7 @@ const AddToDo = ({
   // const [newItem, setNewItem] = useState(false);
   // const [text, textUpdate] = useState("");
 
-  const onNewItem = newItemFac(onNew /*, textUpdate, addingTodoStart*/);
+  // const onNewItem = newItemFac(onNew /*, textUpdate, addingTodoStart*/);
   // const onUndo = undoFac(textUpdate, addingTodoStart);
 
   return newItem ? (
@@ -60,7 +60,7 @@ const AddToDo = ({
       </ListItemText>
 
       <ListItemSecondaryAction>
-        <IconButton aria-label="Add" onClick={() => onNewItem(text)}>
+        <IconButton aria-label="Add" onClick={() => onNew(text)}>
           <Add />
         </IconButton>
       </ListItemSecondaryAction>
@@ -84,7 +84,8 @@ const mapState = ({ todos }) => ({
 const mapDispatch = dispatch => ({
   addingTodoStart: () => dispatch(TodoActions.addingTodoStart()),
   textUpdate: text => dispatch(TodoActions.addingTodoTextUpdate(text)),
-  cancel: () => dispatch(TodoActions.addingTodosCancel())
+  cancel: () => dispatch(TodoActions.addingTodosCancel()),
+  onNew: text => dispatch(TodoActions.addingTodosConfirm(text))
 });
 export default connect(
   mapState,

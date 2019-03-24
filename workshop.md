@@ -134,3 +134,11 @@ const initialState = {
 4. bug because onNewItem triggers addNew and textUpdate
 
 ### optimize usage
+
+1. ADDING_TODO_CONFIRM in AddingTodo component (use text instead of todo, update action and reducer)
+2. connect TodoItem
+   1. only prop will be id (TodoList)
+   2. map item to TodoItem
+   3. copy dispatch props from list to item
+3. Still renders everything always 🤔(maybe because of material-ui)
+4. use React.memo() for functional components
