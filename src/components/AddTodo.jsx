@@ -4,23 +4,34 @@ import {
   ListItemIcon,
   ListItemText,
   IconButton,
-  TextField
+  TextField,
+  ListItemSecondaryAction
 } from "@material-ui/core";
-import { Add, Create } from "@material-ui/icons";
+import { Add, Create, Clear } from "@material-ui/icons";
+
+const newItemFac = (onNew, setText, setNewItem) => text => {
+  onNew({ id: Math.floor(Math.random() * 10000), text, done: false });
+  setText("");
+  setNewItem(false);
+};
+
+const undoFac = (setText, setNewItem) => () => {
+  setText("");
+  setNewItem(false);
+};
 
 const AddToDo = ({ onNew }) => {
   const [newItem, setNewItem] = useState(false);
   const [text, setText] = useState("");
-  const onNewItem = text => {
-    onNew({ id: Math.floor(Math.random() * 10000), text, done: false });
-    setText("");
-    setNewItem(false);
-  };
+
+  const onNewItem = newItemFac(onNew, setText, setNewItem);
+  const onUndo = undoFac(setText, setNewItem);
+
   return newItem ? (
     <ListItem>
       <ListItemIcon>
-        <IconButton aria-label="Add" onClick={() => onNewItem(text)}>
-          <Add />
+        <IconButton aria-label="Add" onClick={onUndo}>
+          <Clear />
         </IconButton>
       </ListItemIcon>
       <ListItemText>
@@ -29,9 +40,14 @@ const AddToDo = ({ onNew }) => {
           label="text"
           value={text}
           onChange={e => setText(e.target.value)}
-          // margin='normal'
         />
       </ListItemText>
+
+      <ListItemSecondaryAction>
+        <IconButton aria-label="Add" onClick={() => onNewItem(text)}>
+          <Add />
+        </IconButton>
+      </ListItemSecondaryAction>
     </ListItem>
   ) : (
     <ListItem>
