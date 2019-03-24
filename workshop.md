@@ -98,3 +98,13 @@ export default {
 Alternatively checkout redux1 branch
 
 ### Use Redux instead of component state
+
+1. add connect to TodoList
+   ```
+   import { connect } from 'react-redux';
+   ```
+2. add mapState for todos.list
+3. add mapDispatch
+4. add action addTodo to mapDispatch and reducer
+5. add action deleteTodo to mapDis and reducer
+6. add action doTodo to mapDis and reducer

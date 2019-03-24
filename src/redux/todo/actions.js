@@ -36,9 +36,9 @@ const addingTodosCancel = () => ({
   type: ActionTypes.ADDING_TODO_CANCEL
 });
 
-const addingTodosConfirm = text => ({
+const addingTodosConfirm = todo => ({
   type: ActionTypes.ADDING_TODO_CONFIRM,
-  text
+  todo
 });
 
 export default {
