@@ -1,4 +1,4 @@
-import React, { memo /*useState*/ } from "react";
+import React /*useState*/ from "react";
 import { connect } from "react-redux";
 import { List, Paper } from "@material-ui/core";
 import ToDoItem from "./TodoItem";
@@ -55,4 +55,4 @@ const mapState = ({ todos }) => ({
 export default connect(
   mapState
   // mapDispatch
-)(memo(TodoList));
+)(TodoList);

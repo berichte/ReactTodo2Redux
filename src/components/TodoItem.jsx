@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   ListItem,
@@ -35,24 +35,15 @@ const ToDoItem = ({ id, text, done, onDone, onUndone, onDelete }) => (
       </IconButton>
     </ListItemSecondaryAction>
   </ListItem>
-  // <div>
-  //   {done ? (
-  //     <span onClick={() => onUndone(id)}>Done</span>
-  //   ) : (
-  //     <span onClick={() => onDone(id)}>Todo</span>
-  //   )}
-
-  //   <span> {text}</span>
-  // </div>
 );
 
 const mapState = ({ todos }, { id }) => {
   const item = todos.list.find(item => item.id === id);
-  return item;
+  return { ...item };
 };
 
 const mapDispatch = dispatch => ({
-  deleteTodo: id => dispatch(TodoActions.deleteTodo(id)),
+  onDelete: id => dispatch(TodoActions.deleteTodo(id)),
   onDone: id => dispatch(TodoActions.checkTodo(id)),
   onUndone: id => dispatch(TodoActions.uncheckTodo(id))
 });
@@ -60,4 +51,4 @@ const mapDispatch = dispatch => ({
 export default connect(
   mapState,
   mapDispatch
-)(memo(ToDoItem));
+)(ToDoItem);
