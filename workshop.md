@@ -142,3 +142,9 @@ const initialState = {
    3. copy dispatch props from list to item
 3. Still renders everything always 🤔(maybe because of material-ui)
 4. use React.memo() for functional components
+
+## implement task
+
+### How to implement redux itself
+
+https://dev.to/selbekk/redux-in-27-lines-2i92

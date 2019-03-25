@@ -1,4 +1,4 @@
-import React /*, { useState } */ from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   ListItem,
@@ -12,17 +12,6 @@ import { Add, Create, Clear } from "@material-ui/icons";
 
 import TodoActions from "../redux/todo/actions";
 
-// const newItemFac = (onNew, setText, setNewItem) => text => {
-//   onNew({ id: Math.floor(Math.random() * 10000), text, done: false });
-// setText("");
-// setNewItem(false);
-// };
-
-// const undoFac = (setText, setNewItem) => () => {
-//   setText("");
-//   setNewItem(false);
-// };
-
 const AddToDo = ({
   newItem,
   addingTodoStart,
@@ -31,12 +20,6 @@ const AddToDo = ({
   text,
   cancel
 }) => {
-  // const [newItem, setNewItem] = useState(false);
-  // const [text, textUpdate] = useState("");
-
-  // const onNewItem = newItemFac(onNew /*, textUpdate, addingTodoStart*/);
-  // const onUndo = undoFac(textUpdate, addingTodoStart);
-
   return newItem ? (
     <ListItem>
       <ListItemIcon>
